@@ -70,7 +70,70 @@ function removeCharacters(str, badbois) {
   }
   return str;
 }
-console.log(removeCharacters('Battle of the Vowels: Hawaii vs. Grozny', 'aeiou'));
+// console.log(removeCharacters('Battle of the Vowels: Hawaii vs. Grozny', 'aeiou'));
 
 // Runtime Complexity = O(n^2)
 // In dire need of optimization
+
+function products(arr) {
+  let answers = [];
+  // Create shallow copy of array without current index
+  // const shallow = (num) => arr.filter(item => item !== num);
+
+  // for (let i = 0; i<arr.length; i++) {
+  //   const newShallow = shallow(arr[i]);
+  //   answers.push(newShallow.reduce((acc, cv) => acc*cv));
+  // }
+  const multipy = arr.reduce((curr, next) => curr*next);
+
+  for (let i = 0; i<arr.length; i++) {
+    answers.push(multipy/arr[i]);
+  }
+
+  console.log(answers);
+}
+
+// products([1, 3, 9, 4]);
+
+// Runtime complexity = O(n^2)
+// Yeah we optimized
+
+function search2dArray(array) {
+  let zeroArray = [];
+  const zeroes = array.map(arr => {
+    for (let i = 0; i<arr.length; i++) {
+      if (arr[i] === 0) {
+        if (!zeroArray.includes(i)) {
+          zeroArray.push(i);
+        }
+      }
+    }
+    return zeroArray;
+  });
+  const rowZeroes = array.map(arr => {
+    let anyZero = arr.indexOf(0); // if Undefined, keep as is
+    if (anyZero === -1) {
+      return arr;
+    } else {
+      return arr.map(number => number * 0);
+    }
+  });
+  return rowZeroes.map(arr => {
+    const zer = zeroes[0];
+    zer.forEach(z => arr[z] = 0);
+    return arr;
+  });
+}
+
+const nums = [
+  [1,0,1,1,0],
+  [0,1,1,1,0],
+  [1,1,1,1,1],
+  [1,0,1,1,1],
+  [1,1,1,1,1]
+];
+
+console.log(search2dArray(nums));
+
+// Runtime complexity = O(n factorial)
+// This could be significantly optimized with recursion (we think)
