@@ -84,10 +84,10 @@ function products(arr) {
   //   const newShallow = shallow(arr[i]);
   //   answers.push(newShallow.reduce((acc, cv) => acc*cv));
   // }
-  const multipy = arr.reduce((curr, next) => curr*next);
+  const multipy = arr.reduce((curr, next) => curr * next);
 
-  for (let i = 0; i<arr.length; i++) {
-    answers.push(multipy/arr[i]);
+  for (let i = 0; i < arr.length; i++) {
+    answers.push(multipy / arr[i]);
   }
 
   console.log(answers);
@@ -101,7 +101,7 @@ function products(arr) {
 function search2dArray(array) {
   let zeroArray = [];
   const zeroes = array.map(arr => {
-    for (let i = 0; i<arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
       if (arr[i] === 0) {
         if (!zeroArray.includes(i)) {
           zeroArray.push(i);
@@ -126,14 +126,32 @@ function search2dArray(array) {
 }
 
 const nums = [
-  [1,0,1,1,0],
-  [0,1,1,1,0],
-  [1,1,1,1,1],
-  [1,0,1,1,1],
-  [1,1,1,1,1]
+  [1, 0, 1, 1, 0],
+  [0, 1, 1, 1, 0],
+  [1, 1, 1, 1, 1],
+  [1, 0, 1, 1, 1],
+  [1, 1, 1, 1, 1]
 ];
 
-console.log(search2dArray(nums));
+// console.log(search2dArray(nums));
 
 // Runtime complexity = O(n factorial)
 // This could be significantly optimized with recursion (we think)
+
+function stringRotation(str1, str2, suffix = '') {
+  if (str1 === str2) {
+    return true;
+  }
+  if (str1.length === 0) {
+    return false;
+  }
+  if (str2.includes(str1) && str2.includes(suffix) && str1.length + suffix.length === str2.length) {
+    return true;
+  }
+  suffix = str1.substring(str1.length - 1) + suffix;
+  str1 = str1.substring(0, str1.length - 1);
+  return stringRotation(str1, str2, suffix);
+}
+
+// Runtime complexity = O(n)
+// no optimization required!
